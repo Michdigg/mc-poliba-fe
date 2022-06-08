@@ -15,11 +15,12 @@ import AdbIcon from '@mui/icons-material/Adb';
 import {green} from "@mui/material/colors";
 import {useState} from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {Link, Outlet} from "react-router-dom";
 
 const pages = ['Shopping Cart', 'My orders'];
 const settings = ["login", "logout"];
 
-const TitlePage = () => {
+const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isLogged, setLogin] = React.useState(false);
@@ -90,15 +91,18 @@ const TitlePage = () => {
                         McPoliba
                     </Typography>
                     <Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} }>
-                        { pages.map(( page ) => (
                             <Button
-                                key={ page }
                                 sx={ {my: 2, color: 'white', display: 'block'} }
                                 style={ {color: '#e3e635'} }
                             >
-                                { page }
+                                <Link to="/">Home</Link>
                             </Button>
-                        )) }
+                        <Button
+                            sx={ {my: 2, color: 'white', display: 'block'} }
+                            style={ {color: '#e3e635'} }
+                        >
+                            <Link to="/orders">My Orders</Link>
+                        </Button>
                     </Box>
                     <ShoppingCartIcon  />
                     <Box sx={ {flexGrow: 0} }>
@@ -130,10 +134,12 @@ const TitlePage = () => {
 
                 </Toolbar>
             </Container>
+
+            <Outlet />
         </AppBar>
 
     );
 
 };
 
-export default TitlePage;
+export default Navbar;

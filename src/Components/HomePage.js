@@ -8,6 +8,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from 'react';
+import Navbar from "./Navbar";
+import {Link, Outlet} from "react-router-dom";
 
 const  HomePage= () =>
 {
@@ -16,6 +18,7 @@ const  HomePage= () =>
 
     return(
         <div>
+            <Navbar />
             <List>
                 <ListItem disablePadding>
                     <Card sx={{ maxWidth: 345 }}>
