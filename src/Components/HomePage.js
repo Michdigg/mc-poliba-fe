@@ -45,7 +45,7 @@ const  HomePage= () =>
         <div>
             <Navbar cart={cart}/>
             <div className={"homePageContainer"}>
-                <Grid container spacing={2} style={{margin: "2px"}}>
+                <Grid container spacing={2} style={{padding: "10px"}}>
                         {
                             products.map((product) => (
                                 <Grid item xs={3} key={product.name}>
@@ -59,7 +59,7 @@ const  HomePage= () =>
                                             {product.name}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            {product.price}
+                                            {product.price} $
                                         </Typography>
                                     </CardContent >
                                     <CardActions style={{float: "right"}}>
@@ -78,7 +78,7 @@ const  HomePage= () =>
                                         >
                                         </Box>
                                         <Button size="small" color="primary" onClick={order(product)}>
-                                            Ordina
+                                            ADD TO CART
                                         </Button>
                                     </CardActions>
                                 </Card>
