@@ -1,28 +1,29 @@
-import {Card, CardActions, CardContent, CardMedia, List, ListItem} from "@mui/material";
+import {Card, CardActions, CardContent, CardMedia} from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from 'react';
 import Navbar from "./Navbar";
 import './HomePage.css';
 import {useEffect} from "react";
 import Grid from '@mui/material/Grid';
+import {useLocation} from "react-router-dom";
 
-const  HomePage= () =>
+const  HomePage= (props) =>
 {
+    const location = useLocation()
     const burgerResourceImg = "https://i0.wp.com/www.fruitbookmagazine.it/wp-content/uploads/2020/11/A-McDonald-s-PLT-burger-with-a-Beyond-Meat-plantbased-patty.jpg?ssl=1"
 
-    const [count, setCount] = React.useState(1);
     const [products, setProducts] = React.useState([]);
-    const [cart, setCart] = React.useState([]);
+    const [cart, setCart] = React.useState(location.state?.cart ? location.state.cart : []);
 
     useEffect(() => {
-        fetch("http://localhost:8080/getProducts")
+        fetch("http://192.168.1.139:8080/getProducts", {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin' : 'http://localhost:8080'
+            }
+        })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -34,9 +35,22 @@ const  HomePage= () =>
             )
     }, [])
 
-    let order = (product) => {
+    let addToCart = (product) => {
         return () => {
-            setCart([...cart, product])
+            if (product.amount === undefined) {
+                product.amount = 1;
+            }
+            const index = cart.findIndex((item) => item.name === product.name )
+            if (index >= 0) {
+                setCart(cart.map((item) => {
+                    if (item.name === product.name)
+                        item.amount++
+                    return item
+                }))
+            }
+            else {
+                setCart ([...cart, product])
+            }
             console.log(cart)
         }
     }
@@ -77,7 +91,7 @@ const  HomePage= () =>
                                             }}
                                         >
                                         </Box>
-                                        <Button size="small" color="primary" onClick={order(product)}>
+                                        <Button size="small" color="primary" onClick={addToCart(product)}>
                                             ADD TO CART
                                         </Button>
                                     </CardActions>

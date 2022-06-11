@@ -5,15 +5,9 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import {green} from "@mui/material/colors";
-import {useState} from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {Link, Outlet} from "react-router-dom";
 import "./Navbar.css";
@@ -65,11 +59,10 @@ const Navbar = (props) => {
         <AppBar position="static" style={ {background: '#239e5a'} }>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <Link to="/" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
                     <Typography
                         variant="h4"
                         noWrap
-                        component="a"
-                        href="/"
                         sx={ {
                             textDecoration: 'none',
                             fontFamily: "Lobster, cursive"
@@ -78,20 +71,17 @@ const Navbar = (props) => {
                     >
                         McPoliba
                     </Typography>
+                    </Link>
                     <Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
-                            <Button
-                                key={"orders"}
-                                sx={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px"} }
-                                href={"/orders"}
-                            >
-                                MY ORDERS
-                            </Button>
+                        <Link to="/orders" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                            MY ORDERS
+                        </Link>
                     </Box>
                     <div className="iconDiv">
                         <Badge color="secondary" badgeContent={props.cart?.length}>
-                            <Button href={"/shoppingCart"} style={ {color: 'white'} }>
+                            <Link to="/shoppingCart" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
                                 <ShoppingCartIcon style={{cursor: "pointer"}} />
-                            </Button>
+                            </Link>
                         </Badge>
                         <Box sx={ {flexGrow: 0} }>
                                 <IconButton onClick={ handleOpenUserMenu }>

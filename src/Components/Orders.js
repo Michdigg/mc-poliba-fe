@@ -1,6 +1,10 @@
-import Box from "@mui/material/Box";
-import {List, ListItem, ListItemButton, ListItemIcon, ListItemText, Step, StepLabel, Stepper} from "@mui/material";
+import {Step, StepLabel, Stepper} from "@mui/material";
 import Navbar from "./Navbar";
+import * as React from 'react';
+import {useEffect} from "react";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import {useLocation} from "react-router-dom";
 
 const steps = [
     'In accettazione',
@@ -11,37 +15,60 @@ const steps = [
 
 const Orders= () =>
 {
+    const location = useLocation()
+    const [cart, setCart] = React.useState(location.state.cart)
+    const [orders, setOrders] = React.useState([]);
+
+    useEffect(() => {
+        fetch("http://192.168.1.139:8080/orders")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(location.state)
+                    setOrders(result);
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }, [])
+
+    const returnStep = (step) => {
+        switch (step) {
+            case "pending":
+                return 0;
+            case "accepted":
+                return 1;
+            case "completed":
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
     return(
         <div>
-            <Navbar />
-            <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                <List>
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                        </ListItemIcon>
-                        <ListItemText primary="Primo ordine" />
-                        <Stepper alternativeLabel style={{width: "100%"}}>
-                            {steps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel>{label}</StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                        </ListItemIcon>
-                        <ListItemText primary="Secondo ordine" />
-                        <Stepper alternativeLabel style={{width: "100%"}}>
-                            {steps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel>{label}</StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
-                    </ListItem>
-                </List>
-            </Box>
+            <Navbar cart={cart}/>
+                    {
+                        orders.map((order) => (
+                            <Grid container spacing={2} style={{padding: "30px"}} key={order._id}>
+                                <Grid item xs={2}>
+                                    <Typography variant="h6" component="div" style={{fontFamily: "Secular One, sans-serif"}}>
+                                        ID Ordine : {order._id}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={10}>
+                                    <Stepper alternativeLabel style={{width: "100%"}} activeStep={returnStep(order.status)}>
+                                        {steps.map((label) => (
+                                            <Step key={label}>
+                                                <StepLabel>{label}</StepLabel>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
+                                </Grid>
+                            </Grid>
+                        ))
+                    }
         </div>
     )
 
