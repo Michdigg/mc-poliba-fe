@@ -75,7 +75,7 @@ const  ShoppingCart= (props) => {
             products: cart,
             amount: getTotalAmount()
         }
-        fetch("http://192.168.1.139:8080/createOrder", {
+        fetch("http://localhost:8080/createOrder", {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',

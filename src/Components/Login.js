@@ -44,7 +44,7 @@ const Login=()=> {
             username: email,
             password: password
         }
-        fetch("http://192.168.1.139:8080/login", {
+        fetch("http://localhost:8080/login", {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',

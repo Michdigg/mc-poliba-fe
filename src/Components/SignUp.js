@@ -34,7 +34,7 @@ const SignUp=() =>{
             password: password,
             type:"customer"
         }
-        fetch("http://192.168.1.139:8080/signUp", {
+        fetch("http://localhost:8080/signUp", {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',

@@ -20,7 +20,7 @@ const Orders= () =>
     const [orders, setOrders] = React.useState([]);
 
     useEffect(() => {
-        fetch("http://192.168.1.139:8080/orders")
+        fetch("http://localhost:8080/orders")
             .then(res => res.json())
             .then(
                 (result) => {

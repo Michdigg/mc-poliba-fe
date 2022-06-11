@@ -38,7 +38,7 @@ const Navbar = (props) => {
 
 
     const logout = () => {
-            fetch("http://192.168.1.139:8080/logout", {
+            fetch("http://localhost:8080/logout", {
                 mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin' : 'http://localhost:8080'

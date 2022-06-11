@@ -18,7 +18,7 @@ const  HomePage= (props) =>
     const [cart, setCart] = React.useState(location.state?.cart ? location.state.cart : []);
 
     useEffect(() => {
-        fetch("http://192.168.1.139:8080/getProducts", {
+        fetch("http://localhost:8080/getProducts", {
             mode: 'cors',
             headers: {
                 'Access-Control-Allow-Origin' : 'http://localhost:8080'
