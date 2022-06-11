@@ -17,8 +17,9 @@ const pages = ['Shopping Cart', 'My orders'];
 const settings = ["login", "logout"];
 
 const Navbar = (props) => {
+
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [isLogged, setLogin] = React.useState(false);
+    const [isLogged, setLogin] = React.useState(true);
     const [cart, setCart] = React.useState(props.cart);
     const handleOpenUserMenu = ( event ) => {
         setAnchorElUser(event.currentTarget);
@@ -35,22 +36,33 @@ const Navbar = (props) => {
         console.log(isLogged)
     };
 
+
     const logout = () => {
+            fetch("http://192.168.1.139:8080/logout", {
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin' : 'http://localhost:8080'
+                }
+            })
         setAnchorElUser(null);
         setLogin(false)
         console.log(isLogged)
     };
 
+
+
     function LoginSettings ( props ) {
         if ( props.isLogged ) {
             return (
                 <MenuItem key="logout" onClick={logout}>
-                    <Typography textAlign="center">logout</Typography>
+                        <Typography textAlign="center">logout</Typography>
                 </MenuItem>);
         }
         return (
             <MenuItem key="login" onClick={login}>
+                <Link to="/login">
                 <Typography textAlign="center">login</Typography>
+                </Link>
             </MenuItem>
         );
     }
