@@ -19,10 +19,6 @@ const  HomePage= (props) =>
 
     useEffect(() => {
         fetch("http://localhost:8080/getProducts", {
-            mode: 'cors',
-            headers: {
-                'Access-Control-Allow-Origin' : 'http://localhost:8080'
-            }
         })
             .then(res => res.json())
             .then(

@@ -77,7 +77,6 @@ const  ShoppingCart= (props) => {
         }
         fetch("http://localhost:8080/createOrder", {
             method: 'POST',
-            mode: 'cors',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {

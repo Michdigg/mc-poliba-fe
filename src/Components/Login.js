@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useContext, useState} from "react";
+import {UserContext} from "../context/UserContext";
 
 
 const theme = createTheme();
@@ -21,6 +23,9 @@ const Login=()=> {
 
     const [email, setMail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState("");
+    const [userContext, setUserContext] = useContext(UserContext);
 
     const setEmail = (e) => {
         setMail(e.target.value)
@@ -30,33 +35,40 @@ const Login=()=> {
         setPassword(e.target.value)
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const login = (e) => {
+        e.preventDefault()
+        setIsSubmitting(true)
+        setError("")
 
-    const login = () => {
-        const data = {
-            username: email,
-            password: password
-        }
+        const genericErrorMessage = "Something went wrong! Please try again later."
+
         fetch("http://localhost:8080/login", {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data)
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: email, password }),
         })
-
+            .then(async response => {
+                setIsSubmitting(false)
+                if (!response.ok) {
+                    if (response.status === 400) {
+                        setError("Please fill all the fields correctly!")
+                    } else if (response.status === 401) {
+                        setError("Invalid email and password combination.")
+                    } else {
+                        setError(genericErrorMessage)
+                    }
+                } else {
+                    const data = await response.json()
+                    setUserContext(oldValues => {
+                        return { ...oldValues, token: data.token }
+                    })
+                }
+            })
+            .catch(error => {
+                setIsSubmitting(false)
+                setError(genericErrorMessage)
+            })
     }
 
     return (
@@ -90,7 +102,7 @@ const Login=()=> {
                     <Typography component="h1" variant="h5" >
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -126,7 +138,7 @@ const Login=()=> {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link to={""} variant="body2">
+                                <Link to={"/"} variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>

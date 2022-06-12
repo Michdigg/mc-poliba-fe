@@ -12,6 +12,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {Link, Outlet} from "react-router-dom";
 import "./Navbar.css";
 import Badge from "@mui/material/Badge";
+import {useEffect, useContext, useCallback} from "react";
+import {UserContext} from "../context/UserContext";
 
 const pages = ['Shopping Cart', 'My orders'];
 const settings = ["login", "logout"];
@@ -19,37 +21,69 @@ const settings = ["login", "logout"];
 const Navbar = (props) => {
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [isLogged, setLogin] = React.useState(true);
     const [cart, setCart] = React.useState(props.cart);
+    const [userContext, setUserContext] = useContext(UserContext);
+    const [isLogged, setLogin] = React.useState(!!userContext.token);
+
     const handleOpenUserMenu = ( event ) => {
         setAnchorElUser(event.currentTarget);
-        console.log(props.cart)
+        console.log(isLogged)
+        console.log(userContext)
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
 
-    const login = () => {
-        setAnchorElUser(null);
-        setLogin(true)
-        console.log(isLogged)
-    };
-
 
     const logout = () => {
-            fetch("http://localhost:8080/logout", {
-                mode: 'cors',
-                headers: {
-                    'Access-Control-Allow-Origin' : 'http://localhost:8080'
-                }
+        fetch("http://localhost:8080/logout", {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userContext.token}`,
+            },
+        }).then(async response => {
+            setUserContext(oldValues => {
+                return { ...oldValues, details: undefined, token: null }
             })
-        setAnchorElUser(null);
-        setLogin(false)
-        console.log(isLogged)
+            window.localStorage.setItem("logout", Date.now())
+        })
     };
 
+    const fetchUserDetails = useCallback(() => {
+        fetch("http://localhost:8080/me", {
+            method: "GET",
+            credentials: "include",
+            // Pass authentication token as bearer token in header
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userContext.token}`,
+            },
+        }).then(async response => {
+            if (response.ok) {
+                const data = await response.json()
+                setUserContext(oldValues => {
+                    return { ...oldValues, details: data }
+                })
+            } else {
+                if (response.status === 401) {
 
+                } else {
+                    setUserContext(oldValues => {
+                        return { ...oldValues, details: null }
+                    })
+                }
+            }
+        })
+    }, [setUserContext, userContext.token])
+
+    useEffect(() => {
+        setLogin(!!userContext.token)
+        if (!userContext.details) {
+            fetchUserDetails()
+        }
+    }, [userContext.details, fetchUserDetails])
 
     function LoginSettings ( props ) {
         if ( props.isLogged ) {
@@ -59,7 +93,7 @@ const Navbar = (props) => {
                 </MenuItem>);
         }
         return (
-            <MenuItem key="login" onClick={login}>
+            <MenuItem key="login">
                 <Link to="/login">
                 <Typography textAlign="center">login</Typography>
                 </Link>
