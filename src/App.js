@@ -7,6 +7,8 @@ import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import {useCallback, useContext, useEffect} from "react";
 import {UserContext} from "./context/UserContext";
+import ChefPanel from "./Components/ChefPanel";
+import ControlPanel from "./Components/ControlPanel";
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
                   <Route path="shoppingCart" element={<ShoppingCart />}></Route>
                   <Route path="login" element={<Login />}></Route>
                   <Route path="signUp" element={<SignUp />}></Route>
+                  <Route path="chefPanel" element={<ChefPanel />}></Route>
+                  <Route path="controlPanel" element={<ControlPanel />}></Route>
               </Routes>
           </BrowserRouter>
       </div>

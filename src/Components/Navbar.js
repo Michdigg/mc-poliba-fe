@@ -123,6 +123,11 @@ const Navbar = (props) => {
                             MY ORDERS
                         </Link>
                     </Box>
+                    <Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
+                        <Link to="/chefPanel" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                            ORDERS
+                        </Link>
+                    </Box>
                     <div className="iconDiv">
                         <Badge color="secondary" badgeContent={props.cart?.length}>
                             <Link to="/shoppingCart" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
