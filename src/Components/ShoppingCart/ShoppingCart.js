@@ -1,19 +1,19 @@
 
 import * as React from 'react';
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import {
     Backdrop,
     Fade,
     Modal,
     TextField
 } from "@mui/material";
-import CartItem from "./CartItem";
+import CartItem from "../CartItem/CartItem";
 import './ShoppingCart.css';
 import {useLocation} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useContext} from "react";
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 const  ShoppingCart= () => {
     const style = {

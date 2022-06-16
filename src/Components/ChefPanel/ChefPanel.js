@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ButtonGroup, Step, StepLabel, Stepper} from "@mui/material";
 import Button from "@mui/material/Button";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useEffect} from "react";

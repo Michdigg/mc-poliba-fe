@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useContext, useState} from "react";
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 
 const theme = createTheme();
@@ -132,7 +132,7 @@ const Login=()=> {
                             sx={{ mt: 3, mb: 2, bgcolor: '#239e5a'}}
                             onClick={login}
                         >
-                            <Link to={"/homepage"}>
+                            <Link to={"/"}>
                                 Sign In
                             </Link>
                         </Button>

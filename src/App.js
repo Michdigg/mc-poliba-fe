@@ -1,14 +1,14 @@
 import * as React from 'react';
-import HomePage from "./Components/HomePage";
+import HomePage from "./Components/HomePage/HomePage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Orders from "./Components/Orders";
-import ShoppingCart from "./Components/ShoppingCart";
-import Login from "./Components/Login";
-import SignUp from "./Components/SignUp";
+import Orders from "./Components/Orders/Orders";
+import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
+import Login from "./Components/Login/Login";
+import SignUp from "./Components/SignUp/SignUp";
 import {useCallback, useContext, useEffect} from "react";
 import {UserContext} from "./context/UserContext";
-import ChefPanel from "./Components/ChefPanel";
-import ControlPanel from "./Components/ControlPanel";
+import ChefPanel from "./Components/ChefPanel/ChefPanel";
+import ControlPanel from "./Components/ControlPanel/ControlPanel";
 
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
                   </Routes>
               ) : (
                   <Routes>
-                      <Route path="homepage" element={<HomePage />}></Route>
+                      <Route path="/" element={<HomePage />}></Route>
                       <Route path="orders" element={<Orders />}></Route>
                       <Route path="shoppingCart" element={<ShoppingCart />}></Route>
                       <Route path="login" element={<Login />}></Route>

@@ -13,7 +13,7 @@ import {Link, Outlet} from "react-router-dom";
 import "./Navbar.css";
 import Badge from "@mui/material/Badge";
 import {useEffect, useContext, useCallback, useRef} from "react";
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 const Navbar = (props) => {
 
@@ -102,7 +102,7 @@ const Navbar = (props) => {
         <AppBar position="static" style={ {background: '#239e5a'} }>
             <Container maxWidth={"100%"} style={{margin: "0px"}}>
                 <Toolbar disableGutters>
-                    <Link to="/homepage" state={{ cart: props.cart, totalArticles: props.totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                    <Link to="/" state={{ cart: props.cart, totalArticles: props.totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
                     <Typography
                         variant="h4"
                         noWrap

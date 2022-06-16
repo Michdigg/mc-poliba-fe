@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
 import * as React from 'react';
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import './HomePage.css';
 import {useEffect} from "react";
 import Grid from '@mui/material/Grid';

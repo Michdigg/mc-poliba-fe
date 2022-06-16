@@ -1,12 +1,12 @@
 import {Step, StepLabel, Stepper} from "@mui/material";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import * as React from 'react';
 import {useEffect} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useLocation} from "react-router-dom";
 import {useContext} from "react";
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 const steps = [
     'In accettazione',
