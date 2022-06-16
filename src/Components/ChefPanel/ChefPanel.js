@@ -75,7 +75,7 @@ const ChefPanel= () =>
                 <div className={"list"}>
                     {
                         orders.map((order) => (
-                            <Grid container spacing={2} style={{padding: "30px"}} key={order._id}>
+                            order.status !== "completed" && <Grid container spacing={2} style={{padding: "30px"}} key={order._id}>
                                 <Grid item xs={2}>
                                     <Typography variant="h6" component="div" style={{fontFamily: "Secular One, sans-serif"}}>
                                         ID Ordine : {order._id}
