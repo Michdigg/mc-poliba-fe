@@ -32,7 +32,7 @@ const  ShoppingCart= () => {
 
     const location = useLocation()
     const [cart, setCart] = React.useState(location.state?.cart ? location.state.cart : [])
-    const [totalArticles, setTotalArticles] = React.useState(location.state?.totalArticles ? location.state.totalArticles : []);
+    const [totalArticles, setTotalArticles] = React.useState(location.state?.totalArticles ? location.state.totalArticles : 0);
     const [open, setOpen] = React.useState(false);
     const [userContext, setUserContext] = useContext(UserContext);
 
@@ -49,7 +49,6 @@ const  ShoppingCart= () => {
                 item.amount++
             return item
         }))
-        console.log(cart)
     }
 
     const removeOne = (cartItem) => {
@@ -58,7 +57,6 @@ const  ShoppingCart= () => {
                 item.amount--
             return item
         }))
-        console.log(cart)
     }
 
     const getTotalAmount = () => {

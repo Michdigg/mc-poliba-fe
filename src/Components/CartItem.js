@@ -15,14 +15,12 @@ const  CartItem= (props) => {
     const addOne = (cartItem) => {
         return () => {
             props.addOne(cartItem)
-            console.log(cartItem)
         }
     }
 
     const removeOne = (cartItem) => {
         return () => {
             props.removeOne(cartItem)
-            console.log(cartItem)
         }
     }
 

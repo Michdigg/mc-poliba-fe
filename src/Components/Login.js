@@ -132,7 +132,7 @@ const Login=()=> {
                             sx={{ mt: 3, mb: 2, bgcolor: '#239e5a'}}
                             onClick={login}
                         >
-                            <Link to={"/"}>
+                            <Link to={"/homepage"}>
                                 Sign In
                             </Link>
                         </Button>

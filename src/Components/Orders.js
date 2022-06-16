@@ -25,12 +25,10 @@ const Orders= () =>
 
 
     useEffect(() => {
-        console.log(userContext)
         fetch("http://localhost:8080/orders/".concat(userContext.details?.username))
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(location.state)
                     setOrders(result);
                 },
                 (error) => {

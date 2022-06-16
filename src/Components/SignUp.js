@@ -74,10 +74,6 @@ const SignUp=() =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
     };
 
     return (
@@ -144,7 +140,7 @@ const SignUp=() =>{
                             sx={{ mt: 3, mb: 2, bgcolor: '#239e5a'}}
                             onClick={signup}
                         >
-                            <Link to={"/"}>
+                            <Link to={"/homepage"}>
                                 Sign Up
                             </Link>
                         </Button>

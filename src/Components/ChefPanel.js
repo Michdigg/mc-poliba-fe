@@ -60,7 +60,6 @@ const ChefPanel= () =>
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(location.state)
                     setOrders(result);
                 },
                 (error) => {

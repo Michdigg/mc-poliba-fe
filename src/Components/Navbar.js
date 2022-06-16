@@ -12,25 +12,17 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {Link, Outlet} from "react-router-dom";
 import "./Navbar.css";
 import Badge from "@mui/material/Badge";
-import {useEffect, useContext, useCallback} from "react";
+import {useEffect, useContext, useCallback, useRef} from "react";
 import {UserContext} from "../context/UserContext";
-
-const pages = ['Shopping Cart', 'My orders'];
-const settings = ["login", "logout"];
 
 const Navbar = (props) => {
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [cart, setCart] = React.useState(props.cart);
-    const [totalArticles, setTotalArticles] = React.useState(props.totalArticles);
     const [userContext, setUserContext] = useContext(UserContext);
     const [isLogged, setLogin] = React.useState(!!userContext.token);
 
     const handleOpenUserMenu = ( event ) => {
         setAnchorElUser(event.currentTarget);
-        console.log(isLogged)
-        console.log(userContext)
-        console.log(props.cart)
     };
 
     const handleCloseUserMenu = () => {
@@ -90,40 +82,27 @@ const Navbar = (props) => {
     function LoginSettings ( props ) {
         if ( props.isLogged ) {
             return (
+            <Link to={"/login"} style={ { color: 'black', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
                 <MenuItem key="logout" onClick={logout}>
-                        <Typography textAlign="center">logout</Typography>
-                </MenuItem>);
+                    <Typography textAlign="center">logout</Typography>
+                </MenuItem>
+            </Link>
+            );
         }
         return (
+        <Link to="/login" style={ { color: 'black', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
             <MenuItem key="login">
-                <Link to="/login">
                 <Typography textAlign="center">login</Typography>
-                </Link>
             </MenuItem>
+        </Link>
         );
-    }
-
-    function NavLinks ( props ) {
-        if ( props.type === "customer" ) {
-            return (<Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
-                <Link to="/orders" state={{ cart: props.cart, totalArticles: props.totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
-                    MY ORDERS
-                </Link>
-            </Box>)
-        } else if (props.type === "chef") {
-            return (<Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
-                <Link to="/chefPanel" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
-                    ORDERS
-                </Link>
-            </Box>)
-        }
     }
 
     return (
         <AppBar position="static" style={ {background: '#239e5a'} }>
             <Container maxWidth={"100%"} style={{margin: "0px"}}>
                 <Toolbar disableGutters>
-                    <Link to="/" state={{ cart: cart, totalArticles: totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                    <Link to="/homepage" state={{ cart: props.cart, totalArticles: props.totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
                     <Typography
                         variant="h4"
                         noWrap
@@ -137,7 +116,18 @@ const Navbar = (props) => {
                     </Typography>
                     </Link>
                     <div style={{display: "flex", width:"100%"}}>
-                        <NavLinks type={userContext.details?.type} totalArticles={props.totalArticles} cart={props.cart}/>
+                        { userContext.details?.type == "customer"  &&
+                        <Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
+                            <Link to="/orders" state={{ cart: props.cart, totalArticles: props.totalArticles }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                                MY ORDERS
+                            </Link>
+                        </Box> }
+                        { userContext.details?.type == "chef"  &&
+                            <Box sx={ {flexGrow: 1, display: {xs: 'none', md: 'flex'}} } style={{paddingLeft: "5%", paddingTop: "7px"}}>
+                                <Link to="/chefPanel" state={{ cart: props.cart }} style={ { color: 'white', display: 'block', fontFamily: "Secular One, sans-serif", fontSize: "18px", textDecoration: "none"} }>
+                                    ORDERS
+                                </Link>
+                            </Box> }
                     </div>
                     <div className="iconDiv">
                         { <Badge color="secondary" badgeContent={ props.totalArticles }>

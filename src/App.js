@@ -43,15 +43,23 @@ function App() {
   return (
       <div>
           <BrowserRouter>
-              <Routes>
-                  <Route path="/" element={<HomePage />}></Route>
-                  <Route path="orders" element={<Orders />}></Route>
-                  <Route path="shoppingCart" element={<ShoppingCart />}></Route>
-                  <Route path="login" element={<Login />}></Route>
-                  <Route path="signUp" element={<SignUp />}></Route>
-                  <Route path="chefPanel" element={<ChefPanel />}></Route>
-                  <Route path="controlPanel" element={<ControlPanel />}></Route>
-              </Routes>
+              {!userContext.token ? (
+                  <Routes>
+                      <Route path="/" element={<Login />}></Route>
+                      <Route path="login" element={<Login />}></Route>
+                      <Route path="signUp" element={<SignUp />}></Route>
+                  </Routes>
+              ) : (
+                  <Routes>
+                      <Route path="homepage" element={<HomePage />}></Route>
+                      <Route path="orders" element={<Orders />}></Route>
+                      <Route path="shoppingCart" element={<ShoppingCart />}></Route>
+                      <Route path="login" element={<Login />}></Route>
+                      <Route path="signUp" element={<SignUp />}></Route>
+                      <Route path="chefPanel" element={<ChefPanel />}></Route>
+                      <Route path="controlPanel" element={<ControlPanel />}></Route>
+                  </Routes>
+              )}
           </BrowserRouter>
       </div>
   );
