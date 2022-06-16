@@ -4,11 +4,6 @@ import Navbar from "./Navbar";
 import {
     Backdrop,
     Fade,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
     Modal,
     TextField
 } from "@mui/material";
@@ -16,10 +11,11 @@ import CartItem from "./CartItem";
 import './ShoppingCart.css';
 import {useLocation} from "react-router-dom";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {useContext} from "react";
+import {UserContext} from "../context/UserContext";
 
-const  ShoppingCart= (props) => {
+const  ShoppingCart= () => {
     const style = {
         position: 'absolute',
         top: '50%',
@@ -36,13 +32,14 @@ const  ShoppingCart= (props) => {
 
     const location = useLocation()
     const [cart, setCart] = React.useState(location.state?.cart ? location.state.cart : [])
+    const [totalArticles, setTotalArticles] = React.useState(location.state?.totalArticles ? location.state.totalArticles : []);
     const [open, setOpen] = React.useState(false);
+    const [userContext, setUserContext] = useContext(UserContext);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const pull_cart = (cartItem) => {
-        const index = cart.findIndex(item => item === cartItem)
         setCart(cart.filter(item => item !== cartItem))
     }
 
@@ -73,7 +70,8 @@ const  ShoppingCart= (props) => {
     const completeOrder = () => {
         const data = {
             products: cart,
-            amount: getTotalAmount()
+            email: userContext.details.username,
+            amount: getTotalAmount(),
         }
         fetch("http://localhost:8080/createOrder", {
             method: 'POST',
@@ -87,17 +85,21 @@ const  ShoppingCart= (props) => {
             body: JSON.stringify(data)
         })
         setCart([])
+        setTotalArticles(0)
         handleClose()
     }
 
     return(
         <div>
-            <Navbar cart={cart}/>
+            <Navbar cart={cart} totalArticles={totalArticles}/>
             <div className={"cartContainer"}>
                 <div className={"cart"}>
                     <div className={"header"}>
                         <h3 className={ "heading" }>Shopping Cart</h3>
-                        <h5 className={ "action" } onClick={() => setCart([])}>Remove all</h5>
+                        <h5 className={ "action" } onClick={() => {
+                            setCart ([])
+                            setTotalArticles(0)
+                        }}>Remove all</h5>
                     </div>
                     {
                         cart.map((cartItem) => (

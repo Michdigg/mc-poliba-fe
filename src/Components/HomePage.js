@@ -16,6 +16,7 @@ const  HomePage= (props) =>
 
     const [products, setProducts] = React.useState([]);
     const [cart, setCart] = React.useState(location.state?.cart ? location.state.cart : []);
+    const [totalArticles, setTotalArticles] = React.useState(location.state?.totalArticles ? location.state.totalArticles : 0);
 
     useEffect(() => {
         fetch("http://localhost:8080/getProducts", {
@@ -33,6 +34,7 @@ const  HomePage= (props) =>
 
     let addToCart = (product) => {
         return () => {
+            setTotalArticles(totalArticles + 1)
             if (product.amount === undefined) {
                 product.amount = 1;
             }
@@ -47,55 +49,56 @@ const  HomePage= (props) =>
             else {
                 setCart ([...cart, product])
             }
-            console.log(cart)
         }
     }
 
     return(
         <div>
-            <Navbar cart={cart}/>
-            <div className={"homePageContainer"}>
-                <Grid container spacing={2} style={{padding: "10px"}}>
+            <Navbar cart={cart} totalArticles={totalArticles}/>
+            <div className={"listContainer"}>
+                <div className={"list"} style={{width: "95%", height: "95%"}}>
+                    <Grid container spacing={2} style={{padding: "10px"}}>
                         {
                             products.map((product) => (
                                 <Grid item xs={3} key={product.name}>
-                                <Card >
-                                    <CardMedia
-                                        component="img"
-                                        src={burgerResourceImg}
-                                    />
-                                    <CardContent unselectable={"on"}>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {product.name}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {product.price} $
-                                        </Typography>
-                                    </CardContent >
-                                    <CardActions style={{float: "right"}}>
-                                        <Box
-                                            sx={{
-                                                color: 'action.active',
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                '& > *': {
-                                                    marginBottom: 2,
-                                                },
-                                                '& .MuiBadge-root': {
-                                                    marginRight: 4,
-                                                },
-                                            }}
-                                        >
-                                        </Box>
-                                        <Button size="small" color="primary" onClick={addToCart(product)}>
-                                            ADD TO CART
-                                        </Button>
-                                    </CardActions>
-                                </Card>
+                                    <Card >
+                                        <CardMedia
+                                            component="img"
+                                            src={burgerResourceImg}
+                                        />
+                                        <CardContent unselectable={"on"}>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                {product.name}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {product.price} $
+                                            </Typography>
+                                        </CardContent >
+                                        <CardActions style={{float: "right"}}>
+                                            <Box
+                                                sx={{
+                                                    color: 'action.active',
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    '& > *': {
+                                                        marginBottom: 2,
+                                                    },
+                                                    '& .MuiBadge-root': {
+                                                        marginRight: 4,
+                                                    },
+                                                }}
+                                            >
+                                            </Box>
+                                            <Button size="small" color="primary" onClick={addToCart(product)}>
+                                                ADD TO CART
+                                            </Button>
+                                        </CardActions>
+                                    </Card>
                                 </Grid>
                             ))
                         }
-                </Grid>
+                    </Grid>
+                </div>
             </div>
         </div>
     )

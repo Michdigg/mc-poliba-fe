@@ -5,6 +5,8 @@ import {useEffect} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useLocation} from "react-router-dom";
+import {useContext} from "react";
+import {UserContext} from "../context/UserContext";
 
 const steps = [
     'In accettazione',
@@ -18,9 +20,13 @@ const Orders= () =>
     const location = useLocation()
     const [cart, setCart] = React.useState(location.state.cart)
     const [orders, setOrders] = React.useState([]);
+    const [userContext, setUserContext] = useContext(UserContext);
+    const [totalArticles, setTotalArticles] = React.useState(location.state?.totalArticles ? location.state.totalArticles : 0);
+
 
     useEffect(() => {
-        fetch("http://localhost:8080/orders")
+        console.log(userContext)
+        fetch("http://localhost:8080/orders/".concat(userContext.details?.username))
             .then(res => res.json())
             .then(
                 (result) => {
@@ -48,7 +54,9 @@ const Orders= () =>
 
     return(
         <div>
-            <Navbar cart={cart}/>
+            <Navbar cart={cart} totalArticles={totalArticles}/>
+            <div className={"listContainer"}>
+                <div className={"list"}>
                     {
                         orders.map((order) => (
                             <Grid container spacing={2} style={{padding: "30px"}} key={order._id}>
@@ -69,6 +77,8 @@ const Orders= () =>
                             </Grid>
                         ))
                     }
+                </div>
+            </div>
         </div>
     )
 
