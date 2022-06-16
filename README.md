@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# McPoliba
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Si vuole realizzare un’applicazione web per la gestione degli ordini all’interno di un fast food
 
-## Available Scripts
+## Frontend
 
-In the project directory, you can run:
+All'interno del frontend dell'applicazione web è presente una cartella con delle directories, che 
+racchiudono tutti i componenti visivi della stessa.
 
-### `npm start`
+### ShoppingCart
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Il primo di questi è rappresentato da ShoppingCArt, il carello che permette di 
+concludere o modificare l'ordine.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![img.png](img.png)
 
-### `npm test`
+### CartItem
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Il componente CartItem si collega alla visualizzazione dei panini, del loro prezzo e la 
+possibilità di inserirli nel carrello.
 
-### `npm run build`
+![img_1.png](img_1.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### HomePage 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La pagina principale permette la creazione di un ordine dal menù.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![img_2.png](img_2.png)
 
-### `npm run eject`
+### Login 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Questo componente permette di effettuare il login se si è 
+già registrati per poter visuallizare i propri ordini.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![img_3.png](img_3.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Login
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Questo componente permette di effettuare la registrazione.
 
-## Learn More
+![img_4.png](img_4.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Navbar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La Navbar è il container per i vari bottoni, tra cui gli ordini, 
+il carello e la possibilità di effettura il logout 
 
-### Code Splitting
+![img_5.png](img_5.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Orders 
 
-### Analyzing the Bundle Size
+Orders consente di visualizzare la presa in carica di un ordine e quelli attivi
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![img_6.png](img_6.png)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
