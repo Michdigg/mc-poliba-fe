@@ -8,7 +8,6 @@ import SignUp from "./Components/SignUp/SignUp";
 import {useCallback, useContext, useEffect} from "react";
 import {UserContext} from "./context/UserContext";
 import ChefPanel from "./Components/ChefPanel/ChefPanel";
-import ControlPanel from "./Components/ControlPanel/ControlPanel";
 
 
 function App() {
@@ -57,7 +56,6 @@ function App() {
                       <Route path="login" element={<Login />}></Route>
                       <Route path="signUp" element={<SignUp />}></Route>
                       <Route path="chefPanel" element={<ChefPanel />}></Route>
-                      <Route path="controlPanel" element={<ControlPanel />}></Route>
                   </Routes>
               )}
           </BrowserRouter>
