@@ -2,7 +2,7 @@
 
 Si vuole realizzare un’applicazione web per la gestione degli ordini all’interno di un fast food
 e sono stati implementati tutti i casi d'uso. Sono state gestite le sessioni
-attraverso passport secondo i JKT. Inoltre, nonostante sia stata utilizzata MUI
+attraverso passport secondo i JWT. Inoltre, nonostante sia stata utilizzata MUI
 come libreria grafica, gran parte del CSS è stato realizzato a mano.
 
 ## Frontend
@@ -49,7 +49,7 @@ Questo componente permette di effettuare la registrazione.
 ### Navbar
 
 La Navbar è il container per i vari bottoni, tra cui gli ordini, 
-il carello e la possibilità di effettura il logout 
+il carello e la possibilità di effettura il logout.
 
 ![img_5.png](img_5.png)
 
