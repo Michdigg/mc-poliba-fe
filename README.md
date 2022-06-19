@@ -4,40 +4,48 @@ Si vuole realizzare un’applicazione web per la gestione degli ordini all’int
 
 Tutti i casi d'uso sono stati implementati e in particolare:
 - Il frontend è stato realizzato in React
-- Sono state gestite le sessioni attraverso passport secondo i JWT. 
+- Sono state gestite le sessioni attraverso passport secondo i JWT.
 - Nonostante sia stata utilizzata MUI come libreria grafica, gran parte del CSS è stato realizzato a mano.
+
+# Autenticazione
+
+Per entrare nell'applicazione si può:
+- Creare un nuovo utente (che verrà registrato come "customer")
+- Accedere attraverso un utente già registrato
+- Se si vuole accedere come "chef" per poter accettare/completare gli ordini è stata preimpostata un utenza => email: chef@mcPoliba.com, password: chef123
+- Nuovi utenti di tipo "chef" potranno essere aggiunti dal backend tramite le API successivamente specificate.
 
 ## Frontend
 
 Per il frontend è stato utilizzato React.
-All'interno dell'applicazione web è presente una cartella con delle directories, che 
+All'interno dell'applicazione web è presente una cartella con delle directories, che
 racchiudono tutti i componenti visivi della stessa.
 
 ![img_1.png](docs/img_1.png)
 
 ### ShoppingCart
 
-Il primo di questi è rappresentato da ShoppingCart, il carello che permette di 
+Il primo di questi è rappresentato da ShoppingCart, il carello che permette di
 concludere o modificare l'ordine.
 
 ![img.png](docs/img.png)
 
 ### CartItem
 
-Il componente CartItem è uno degli elementi selezionati dal menù e nella sezione di ShoppingCart 
+Il componente CartItem è uno degli elementi selezionati dal menù e nella sezione di ShoppingCart
 può essere modificato.
 
 ![img_7.png](docs/img_7.png)
 
-### HomePage 
+### HomePage
 
 La pagina principale permette la creazione di un ordine dal menù.
 
 ![img_2.png](docs/img_2.png)
 
-### Login 
+### Login
 
-Questo componente permette di effettuare il login se si è 
+Questo componente permette di effettuare il login se si è
 già registrati per poter visuallizare i propri ordini.
 
 ![img_3.png](docs/img_3.png)
@@ -50,12 +58,12 @@ Questo componente permette di effettuare la registrazione.
 
 ### Navbar
 
-La Navbar è il container per i vari bottoni, tra cui gli ordini, 
+La Navbar è il container per i vari bottoni, tra cui gli ordini,
 il carello e la possibilità di effettura il logout.
 
 ![img_5.png](docs/img_5.png)
 
-### Orders 
+### Orders
 
 Orders consente di visualizzare la presa in carica di un ordine e quelli attivi
 
@@ -63,7 +71,7 @@ Orders consente di visualizzare la presa in carica di un ordine e quelli attivi
 
 ### ChefPanel
 
-La finestra del cuoco permette di prendere in carica o completare un 
+La finestra del cuoco permette di prendere in carica o completare un
 ordine e verificare gli ordini attivi tramite id.
 
 ![img_8.png](docs/img_8.png)
@@ -77,13 +85,13 @@ I dati sono stati memorizzati all’interno di un database MongoDB.
 
 ### Models
 
-Nella directory del backend, models, vengono creati gli oggetti con i propri 
+Nella directory del backend, models, vengono creati gli oggetti con i propri
 attrtibuti che saranno aggiunti e gestiti dal database.
 
 ### Controllers
 
-In questa direcory è presente la logica per effettura  il logout, il login con 
-l'autentificazione tramite jwt, l'aggiunta, l'eliminazione o l'aggiornamento 
+In questa direcory è presente la logica per effettura  il logout, il login con
+l'autentificazione tramite jwt, l'aggiunta, l'eliminazione o l'aggiornamento
 di un prodotto e per controllare e gestire gli ordini.
 
 ### Autenticazione con JWT
@@ -102,11 +110,11 @@ Le funzione utilizzate per l'autenticazione all'interno di userController sono:
 
 ## API
 
-L’applicazione dovrà fornire ai diversi attori le corrette API per il loro successivo utilizzo mediante dispositivi 
+L’applicazione dovrà fornire ai diversi attori le corrette API per il loro successivo utilizzo mediante dispositivi
 differenti. In particolare, i clienti del fast food potranno accedere al menù mediante il sito web e creare un ordine
-mediante selezione degli elementi dal menù e pagamento immediato (simulato). I clienti, inoltre, potranno visualizzare lo 
-stato del loro ordine. I cuochi del fast food potranno visualizzare la lista degli ordini inseriti, confermare l’inizio 
-della lavorazione di un ordine e notificare la fine della preparazione. L’amministratore del sistema potrà aggiungere, 
+mediante selezione degli elementi dal menù e pagamento immediato (simulato). I clienti, inoltre, potranno visualizzare lo
+stato del loro ordine. I cuochi del fast food potranno visualizzare la lista degli ordini inseriti, confermare l’inizio
+della lavorazione di un ordine e notificare la fine della preparazione. L’amministratore del sistema potrà aggiungere,
 modificare e rimuovere elementi all’interno del menù e potrà accedere allo storico delle transazioni.
 
 ![img_11.png](docs/img_11.png)
@@ -124,25 +132,25 @@ me permette di ricevere tramite token l'oggetto che rappresenta l'utente loggato
 
 ![img_14.png](docs/img_14.png)
 
-### Refresh token 
+### Refresh token
 
 Questa API consente di aggiornare la pagina senza perdere il token.
 
 ![img_15.png](docs/img_15.png)
 
- 
-### Logout 
+
+### Logout
 
 Permette di effettuare il logout.
 
-![img_16.png](docs/img_16.png) 
+![img_16.png](docs/img_16.png)
 
 ### Order
 
 Queste API permettono rispettivamenre di creare, completare o accettare un ordine, prendere tutti gli ordini
 attivi e quelli relativi all'utente loggato
 
-### Product 
+### Product
 
 Le APi consentono di aggiungere un prodotto, prenderlo, eliminarlo e aggiornarlo.
 
